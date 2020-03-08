@@ -6,7 +6,10 @@ jdk:
 services:
   - redis-server
 
-script: jdk_switcher use oraclejdk8
+script: 
+  - jdk_switcher use openjdk8
+  - export JAVA_HOME=$HOME/openjdk8
+  - $TRAVIS_BUILD_DIR/install-jdk.sh --install openjdk11 --target $JAVA_HOME
 
 install: ./mvnw -U install --quiet -DskipTests=true -P bootstrap
 script: ./mvnw clean test -P bootstrap
